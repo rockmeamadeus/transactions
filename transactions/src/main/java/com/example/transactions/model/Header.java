@@ -11,7 +11,7 @@ public class Header {
 
     private String tipoRegistro;
     private String idPago;
-    private String reservado;
+    //private String reservado;
     private Moneda moneda;
     private BigDecimal montoTotal;
     private BigDecimal totalDescuentos;

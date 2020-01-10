@@ -20,23 +20,20 @@ public class TransactionScheduler {
     @Autowired
     private RetryTemplate retryTemplate;
 
-    private static int number = 0;
-
     @Autowired
     private TransactionRestClient transactionRestClient;
 
 
-    @Scheduled(cron = "0/1 1/10 * ? * *")
+    @Scheduled(cron = "0 1/10 * ? * *")
     public void fetchTransactions() {
         retryTemplate.execute(context -> {
 
-            System.out.println("-----------------" + LocalDateTime.now() + "RETRY: " + ++number + "--------------");
 
-            System.out.println(transactionRestClient.fetchAll());
+            System.out.println(LocalDateTime.now());
 
-            number = 0;
+            System.out.println(transactionRestClient.fetchAll().get());
 
-            return null;
+            return context;
 
         });
 

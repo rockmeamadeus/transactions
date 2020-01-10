@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class Footer {
 
     private String tipoRegistro;
-    private String reservado;
+    //private String reservado;
     private LocalDate fechaPago;
     private String idCliente;
 

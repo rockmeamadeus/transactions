@@ -26,7 +26,7 @@ public class File {
         this.header = Header.builder()
                 .tipoRegistro(header.substring(0, 1))
                 .idPago(header.substring(1, 33))
-                .reservado(header.substring(33, 36))
+                //.reservado(header.substring(33, 36))
                 .moneda(Moneda.valueOfMoneda(header.substring(36, 39)))
                 .montoTotal(new BigDecimal(header.substring(39, 52)))
                 .totalDescuentos(new BigDecimal(header.substring(52, 65)))
@@ -41,7 +41,7 @@ public class File {
                         .tipoRegistro(s.substring(0, 1))
                         .idTransaccion(s.substring(1, 33))
                         .monto(new BigDecimal(s.substring(33, 46)))
-                        .reservado(s.substring(46, 51))
+                        //.reservado(s.substring(46, 51))
                         .tipo(TipoTransaccion.valueOfTipoTransaccion(s.substring(51)))
                         .build()).
                         collect(Collectors.toList());
@@ -54,14 +54,14 @@ public class File {
                         .tipoRegistro(s.substring(0, 1))
                         .idDescuento(s.substring(1, 33))
                         .monto(new BigDecimal(s.substring(33, 46)))
-                        .reservado(s.substring(46, 49))
+                        //.reservado(s.substring(46, 49))
                         .tipo(TipoDescuento.valueOfTipoDescuento(Integer.valueOf(s.substring(49, 50))))
                         .build())
                 .collect(Collectors.toList());
 
         this.footer = Footer.builder()
                 .tipoRegistro(footer.substring(0, 1))
-                .reservado(footer.substring(1, 16))
+                //.reservado(footer.substring(1, 16))
                 .fechaPago(LocalDate.parse(footer.substring(16, 24), DateTimeFormatter.ofPattern("yyyyMMdd")))
                 .idCliente(footer.substring(16, 48))
                 .build();

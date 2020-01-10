@@ -79,7 +79,7 @@ class FileTest {
 
         assertThat(file.getHeader().getTipoRegistro(), is("1"));
         assertThat(file.getHeader().getIdPago(), is("b4d837dc253c43dba518963c71d0164f"));
-        assertThat(file.getHeader().getReservado(), is("   "));
+        //assertThat(file.getHeader().getReservado(), is("   "));
         assertThat(file.getHeader().getMoneda(), is(Moneda.USD));
         assertThat(file.getHeader().getMontoTotal(), is(BigDecimal.valueOf(99366137)));
         assertThat(file.getHeader().getTotalDescuentos(), is(BigDecimal.valueOf(1393915)));
@@ -88,19 +88,19 @@ class FileTest {
         assertThat(file.getTransaccions().get(0).getTipoRegistro(), is("2"));
         assertThat(file.getTransaccions().get(0).getIdTransaccion(), is("7990e3e3813546eda46bf06b29f98c64"));
         assertThat(file.getTransaccions().get(0).getMonto(), is(new BigDecimal(9698543)));
-        assertThat(file.getTransaccions().get(0).getReservado(), is("     "));
+        //assertThat(file.getTransaccions().get(0).getReservado(), is("     "));
         assertThat(file.getTransaccions().get(0).getTipo(), is(TipoTransaccion.APROBADO));
 
         assertThat(file.getDescuentos().size(), is(3));
         assertThat(file.getDescuentos().get(0).getTipoRegistro(), is("3"));
         assertThat(file.getDescuentos().get(0).getIdDescuento(), is("a9c5e125d3fa406997c93c1127c7d440"));
         assertThat(file.getDescuentos().get(0).getMonto(), is(new BigDecimal(537642)));
-        assertThat(file.getDescuentos().get(0).getReservado(), is("   "));
+        //assertThat(file.getDescuentos().get(0).getReservado(), is("   "));
         assertThat(file.getDescuentos().get(0).getTipo(), is(TipoDescuento.IVA));
 
         assertThat(file.getFooter(), is(notNullValue()));
         assertThat(file.getFooter().getTipoRegistro(), is("4"));
-        assertThat(file.getFooter().getReservado(), is("               "));
+        //assertThat(file.getFooter().getReservado(), is("               "));
         assertThat(file.getFooter().getFechaPago().toString(), is("2020-01-14"));
 
 

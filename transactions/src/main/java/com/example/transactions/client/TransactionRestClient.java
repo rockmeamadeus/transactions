@@ -29,18 +29,18 @@ public class TransactionRestClient {
 
         ResponseEntity<String> result = restTemplate.exchange("https://increase-transactions.herokuapp.com/file.txt", HttpMethod.GET, entity, String.class);
 
-        return proccessResponse(result.getBody());
+        return proccessfetchAllResponse(result.getBody());
 
     }
 
-    private Optional<List<File>> proccessResponse(String body) {
+    private Optional<List<File>> proccessfetchAllResponse(String body) {
 
-        Pattern pattern = Pattern.compile("((1[a-z0-9]{32}[\\s]{3}[a-z0-9]{42}[\\n])(2[a-z0-9]{45}[\\s]{5}[\\d][\\n])+(3[a-z0-9]{45}[\\s]{3}[\\d][\\n])+(4[\\s]{15}[a-z0-9]{40}))+");
+        Pattern pattern = Pattern.compile("(1[\\S]{32}[\\s]{3}[\\S]{42}[\\n])((2[\\S]{45}[\\s]{5}[\\S]{1}[\\n])+)((3[\\S]{45}[\\s]{3}[\\d][\\n])+)(4[\\s]{15}[\\S]{40})");
 
         List<File> files = Stream.of(body).
                 map(pattern::matcher)
                 .filter(Matcher::find)
-                .map(matcher -> new File(matcher.group(1), matcher.group(2), matcher.group(3), matcher.group(4)))
+                .map(matcher -> new File(matcher.group(1), matcher.group(2), matcher.group(5), matcher.group(6)))
                 .collect(Collectors.toList());
 
         return Optional.of(files);

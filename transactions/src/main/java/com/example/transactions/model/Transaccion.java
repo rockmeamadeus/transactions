@@ -13,6 +13,6 @@ public class Transaccion {
     private String tipoRegistro;
     private String idTransaccion;
     private BigDecimal monto;
-    private String reservado;
+    //private String reservado;
     private TipoTransaccion tipo;
 }

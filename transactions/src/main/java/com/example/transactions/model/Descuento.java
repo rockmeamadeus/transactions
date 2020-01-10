@@ -12,7 +12,7 @@ public class Descuento {
     private String tipoRegistro;
     private String idDescuento;
     private BigDecimal monto;
-    private String reservado;
+    //private String reservado;
     private TipoDescuento tipo;
 
 }
