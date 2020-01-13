@@ -3,6 +3,7 @@ package com.example.transactions.model;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Data
-public class File {
+public class File implements Serializable {
 
     private Header header;
     private List<Transaccion> transaccions;
@@ -62,8 +63,10 @@ public class File {
         this.footer = Footer.builder()
                 .tipoRegistro(footer.substring(0, 1))
                 //.reservado(footer.substring(1, 16))
-                .fechaPago(LocalDate.parse(footer.substring(16, 24), DateTimeFormatter.ofPattern("yyyyMMdd")))
-                .idCliente(footer.substring(16, 48))
+//                .fechaPago(LocalDate.parse(footer.substring(16, 24), DateTimeFormatter.ofPattern("yyyyMMdd")))
+
+                .fechaPago(footer.substring(16, 24))
+                .idCliente(footer.substring(24, 56))
                 .build();
     }
 

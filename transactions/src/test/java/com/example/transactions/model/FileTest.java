@@ -102,7 +102,7 @@ class FileTest {
         assertThat(file.getFooter().getTipoRegistro(), is("4"));
         //assertThat(file.getFooter().getReservado(), is("               "));
         assertThat(file.getFooter().getFechaPago().toString(), is("2020-01-14"));
-
+        assertThat(file.getFooter().getIdCliente(), is("d5ad08db86364243b7cfb28af5766f39"));
 
     }
 

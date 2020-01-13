@@ -1,17 +1,12 @@
 package com.example.transactions.scheduler;
 
 import com.example.transactions.client.TransactionRestClient;
+import com.example.transactions.service.TransactionQueueSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.retry.annotation.Backoff;
-import org.springframework.retry.annotation.EnableRetry;
-import org.springframework.retry.annotation.Recover;
-import org.springframework.retry.annotation.Retryable;
 import org.springframework.retry.support.RetryTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 
 @Service
@@ -24,16 +19,16 @@ public class TransactionScheduler {
     private TransactionRestClient transactionRestClient;
 
 
-    @Scheduled(cron = "0 1/10 * ? * *")
+    @Autowired
+    private TransactionQueueSenderService transactionQueueSenderService;
+
+    @Scheduled(cron = "10 0/2 * ? * *")
     public void fetchTransactions() {
         retryTemplate.execute(context -> {
 
+            transactionRestClient.fetchAll().get().stream().forEach(file -> transactionQueueSenderService.send(file));
 
-            System.out.println(LocalDateTime.now());
-
-            System.out.println(transactionRestClient.fetchAll().get());
-
-            return context;
+            return null;
 
         });
 
